@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class api extends CI_Controller {
+class c_category extends CI_Controller {
 
   public function index() {
     $this->output->set_content_type('text/plain');
@@ -12,22 +12,16 @@ class api extends CI_Controller {
   }
 
   public function insert() {
-    $id = 0;
-    $name = 3;
-    $this->output->set_content_type('text/plain');
-    if(isset($_POST['id'])) {
-      $id = $_POST['id'];
-    }
-    if(isset($_POST['name'])) {
-      $name = $_POST['name'];
-    }
+    $category_name = "饮料";
+    $parent_id = 0;
+    $active = 1;
     $this->load->model('Category');
-    $a = $this->Category->insertOne($id,$name);
+    $a = $this->Category->insert($category_name,$parent_id,$active);
     echo $a;
   }
 
   public function all() {
-    $this->output->set_content_type('text/plain');
+    $this->output->set_content_type('application/json');
     $this->load->model('Category');
     $a = $this->Category->all();
     echo $a;
